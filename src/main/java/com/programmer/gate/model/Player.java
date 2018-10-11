@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import java.util.List;
 
 @Entity
 public class Player {
@@ -30,6 +31,8 @@ public class Player {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id", nullable = false)
     private Team team;
+
+	private Shoes shoes;
 	
 	public Player() {
 	}
@@ -73,6 +76,16 @@ public class Player {
 	public void setTeam(Team team) {
 		this.team = team;
 	}
+
+	public Shoes getShoes() {
+		return shoes;
+	}
+
+	public void setShoes(Shoes shoes) {
+		this.shoes = shoes;
+	}
+
+
 	
 	
 }

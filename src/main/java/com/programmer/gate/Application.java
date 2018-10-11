@@ -2,6 +2,8 @@ package com.programmer.gate;
 
 import java.util.List;
 
+import com.programmer.gate.model.Shoes;
+import com.programmer.gate.model.Team;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,13 +23,22 @@ public class Application implements CommandLineRunner{
 	
 	@Override
 	public void run(String... arg0) throws Exception {
+
+		Team team = soccerService.getTeam();
+		Shoes shoes = soccerService.getShoes();
+
+		for(int i=0; i<3; i++){
+			soccerService.addBarcelonaPlayer("Xavi Hernandez" + i, "Midfielder" + i, 6 + i, team, shoes);
+		}
+
+		soccerService.addBarcelonaPlayer("Xavi Hernandez", "Midfielder", 6, team, shoes);
 		
-		soccerService.addBarcelonaPlayer("Xavi Hernandez", "Midfielder", 6);
-		
-		List<String> players = soccerService.getAllTeamPlayers(1);
+		List<String> players = soccerService.getAllTeamPlayers(team.getId());
 		for(String player : players)
 		{
-			System.out.println("Introducing Barca player => " + player);
+			System.out.println(String.format("Introducing %s player %s", team.getName(), player));
 		}
+
+		System.out.println("Amount of Players team 1: " + players.size());
 	}
 }
